@@ -1,0 +1,90 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+  <span>Signup</span>
+  <span class="spacer"></span>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography" fxLayout="column" fxLayoutAlign="start stretch">
+  <form [formGroup]="signupForm" (ngSubmit)="handleSubmit()" fxFlex>
+    <div fxLayout="column" fxFlex>
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid">
+          <span *ngIf="signupForm.get('name')?.hasError('required')">Ce champ est obligatoire</span>
+          <span *ngIf="signupForm.get('name')?.hasError('pattern')">Ce champ est invalide</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required>
+        <mat-error *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid">
+          <span *ngIf="signupForm.get('email')?.hasError('required')">Ce champ est obligatoire</span>
+          <span *ngIf="signupForm.get('email')?.hasError('pattern')">Ce champ est invalide</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Numéro de téléphone</mat-label>
+        <input matInput formControlName="contactNumber" required>
+        <mat-error *ngIf="signupForm.get('contactNumber')?.touched && signupForm.get('contactNumber')?.invalid">
+          <span *ngIf="signupForm.get('contactNumber')?.hasError('required')">Ce champ est obligatoire</span>
+          <span *ngIf="signupForm.get('contactNumber')?.hasError('pattern')">Ce champ est invalide</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Mot de passe</mat-label>
+        <input matInput formControlName="password" [type]="password ? 'password' : 'text'" required>
+        <button type="button" mat-icon-button matSuffix (click)="password = !password">
+          <mat-icon>{{ password ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
+          <span *ngIf="signupForm.get('password')?.hasError('required')">Ce champ est obligatoire</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Confirmer mot de passe</mat-label>
+        <input matInput formControlName="confirmPassword" [type]="confirmPassword ? 'password' : 'text'" required>
+        <button type="button" mat-icon-button matSuffix (click)="confirmPassword = !confirmPassword">
+          <mat-icon>{{ confirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid">
+          <span *ngIf="signupForm.get('confirmPassword')?.hasError('required')">Ce champ est obligatoire</span>
+        </mat-error>
+        <mat-hint *ngIf="signupForm.hasError('mismatch') && signupForm.get('confirmPassword')?.touched">
+          <span>Le mot de passe et la confirmation ne correspondent pas</span>
+        </mat-hint>
+      </mat-form-field>
+
+    </div>
+    <mat-dialog-actions align="end">
+     <!-- Bouton Créer -->
+<button 
+  mat-raised-button 
+  type="submit" 
+  [disabled]="validateSubmit()" 
+  class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200"
+>
+  
+  Créer
+</button>
+
+<!-- Bouton Fermer -->
+<button 
+  mat-raised-button 
+  mat-dialog-close 
+  class="flex items-center mx-5 gap-2 bg-red-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-700 transition-colors duration-200"
+>
+  
+  Fermer
+</button>
+
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>

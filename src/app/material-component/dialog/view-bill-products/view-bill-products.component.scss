@@ -1,0 +1,101 @@
+.mat-toolbar {
+  margin: 0;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: #679436;  // Couleur de fond de la toolbar
+  color: white;               // Couleur du texte
+  height: 56px;               // Hauteur de la toolbar
+  font-size: 1.2rem;          // Taille de la police
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Ombre pour la toolbar
+}
+
+.mat-dialog-content {
+  min-width: 600px; /* Largeur minimale */
+  max-width: 800px; /* Largeur maximale */
+  max-height: 80vh; /* Hauteur maximale */
+  overflow-y: auto; /* Permettre le défilement vertical */
+  font-size: 16px; /* Taille de la police par défaut */
+}
+
+.mat-dialog-content table {
+  width: 100%; /* Remplir la largeur disponible */
+}
+
+.mat-dialog-content th {
+  font-size: 18px; /* Taille de la police pour les en-têtes de table */
+  font-weight: bold; /* Mettre en gras les en-têtes */
+}
+
+.mat-dialog-content td {
+  font-size: 16px; /* Taille de la police pour le contenu des cellules */
+}
+
+
+#customers {
+  width: 100%;                // Largeur maximale
+  margin-bottom: 20px;       // Espace sous le tableau
+  border-collapse: collapse;  // Supprime l'espacement entre les cellules
+}
+
+table {
+  width: 100%;                // Utilise toute la largeur
+  border: 1px solid #ccc;     // Bordure autour de la table
+}
+
+th, td {
+  padding: 8px;               // Espacement dans les cellules
+  text-align: left;           // Aligne le texte à gauche
+  border-bottom: 1px solid #ddd; // Ligne en bas des cellules
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd; /* Bordure des cellules */
+  padding: 8px; /* Espacement à l'intérieur des cellules */
+}
+
+.responsive_table {
+  margin-top: 20px; /* Espacement au-dessus de la table */
+}
+
+.mat-table {
+  width: 100%; /* S'assurer que la table remplit la largeur */
+}
+
+.mat-header-cell {
+  background-color: #f5f5f5; /* Couleur d'arrière-plan pour les en-têtes */
+}
+
+th {
+  background-color: #f0f0f0;  // Fond gris clair pour les en-têtes
+  color: #000;                // Couleur du texte des en-têtes
+}
+
+.mat-dialog-actions {
+  margin-top: auto;           // Pousse les actions vers le bas
+}
+
+.spacer {
+  flex: 1 1 auto;             // Pour gérer l'espacement
+}
+
+.mat-error {
+  color: red;                 // Couleur des messages d'erreur
+  font-size: 0.875rem;        // Taille de la police des erreurs
+}
+
+.responsive_table {
+  overflow-x: auto;           // Défilement horizontal si nécessaire
+  margin-top: 20px;           // Espace au-dessus du tableau
+}
+
+.mat-select {
+  background-color: white;    // Fond blanc pour les sélecteurs
+}
+
+.mat-option {
+  color: black;               // Couleur du texte des options
+}
+
+.mat-select-arrow {
+  color: black;               // Couleur de la flèche des sélecteurs
+}

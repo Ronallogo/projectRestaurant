@@ -1,0 +1,202 @@
+<mat-card class="bg-white shadow-md rounded-lg p-6 mb-6 border border-gray-200">
+    <div class="flex justify-between items-center">
+        <span class="text-xl font-bold text-gray-800">Gestion de Commande</span>
+        <button mat-flat-button color="primary"
+                class="float-right bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-300 flex items-center"
+                [disabled]="validateSubmit()"
+                (click)="submitAction()">
+            <mat-icon class="mr-2">print</mat-icon>
+            <span>Envoyer && Voir Factures</span>
+        </button>
+    </div>
+</mat-card>
+
+<hr class="my-6 border-gray-200">
+
+<mat-card class="bg-white shadow-md rounded-lg p-6 mb-6 border border-gray-200">
+    <h2 class="text-lg font-bold text-gray-800 mb-4">Détails du client</h2>
+    <form [formGroup]="manageOrderForm">
+        <div class="flex flex-col">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Nom Field -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label class="text-gray-600">Nom</mat-label>
+                    <input matInput formControlName="name" required class="text-gray-700">
+                    <mat-error *ngIf="manageOrderForm.controls.name.touched && manageOrderForm.controls.name.invalid">
+                        <span *ngIf="manageOrderForm.controls.name.errors?.required" class="text-red-500 text-sm">Ce champ est obligatoire.</span>
+                        <span *ngIf="manageOrderForm.controls.name.errors?.pattern" class="text-red-500 text-sm">Ce champ est invalide.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Email Field -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label class="text-gray-600">Email</mat-label>
+                    <input matInput formControlName="email" required class="text-gray-700">
+                    <mat-error *ngIf="manageOrderForm.controls.email.touched && manageOrderForm.controls.email.invalid">
+                        <span *ngIf="manageOrderForm.controls.email.errors?.required" class="text-red-500 text-sm">Ce champ est obligatoire.</span>
+                        <span *ngIf="manageOrderForm.controls.email.errors?.pattern" class="text-red-500 text-sm">Ce champ est invalide.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Téléphone Field -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label class="text-gray-600">Téléphone</mat-label>
+                    <input matInput formControlName="contactNumber" required class="text-gray-700">
+                    <mat-error *ngIf="manageOrderForm.controls.contactNumber.touched && manageOrderForm.controls.contactNumber.invalid">
+                        <span *ngIf="manageOrderForm.controls.contactNumber.errors?.required" class="text-red-500 text-sm">Ce champ est obligatoire.</span>
+                        <span *ngIf="manageOrderForm.controls.contactNumber.errors?.pattern" class="text-red-500 text-sm">Ce champ est invalide.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Mode de paiement Field -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label class="text-gray-600">Mode de paiement</mat-label>
+                    <mat-select formControlName="paymentMethod" required>
+                        <mat-option value="Cash" class="text-gray-700">En Espèce</mat-option>
+                        <mat-option value="Credit Card" class="text-gray-700">Carte de Crédit</mat-option>
+                        <mat-option value="Debit Card" class="text-gray-700">Carte de Débit</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="manageOrderForm.controls.paymentMethod.touched && manageOrderForm.controls.paymentMethod.invalid">
+                        <span *ngIf="manageOrderForm.controls.paymentMethod.errors?.required" class="text-red-500 text-sm">Ce champ est obligatoire.</span>
+                        <span *ngIf="manageOrderForm.controls.paymentMethod.errors?.pattern" class="text-red-500 text-sm">Ce champ est invalide.</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-card>
+
+<hr class="my-6 border-gray-200">
+
+<mat-card class="bg-white shadow-md rounded-lg p-6 mb-6 border border-gray-200">
+    <h2 class="text-lg font-bold text-gray-800 mb-4">Sélectionner Produit</h2>
+    <form [formGroup]="manageOrderForm">
+        <div class="flex flex-col">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+                <!-- Catégorie Field -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label class="text-gray-600">Catégorie</mat-label>
+                    <mat-select formControlName="category">
+                        @for (category of categories; track category) {
+                            <mat-option (click)="getProductsByCategory(category)" [value]="category" class="text-gray-700">
+                                {{ category.name }}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Produit Field -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label class="text-gray-600">Produit</mat-label>
+                    <mat-select formControlName="product">
+                        @for (product of products; track product) {
+                            <mat-option (click)="getProductDetails(product)" [value]="product" class="text-gray-700">
+                                {{ product.name }}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Prix Field -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label class="text-gray-600">Prix</mat-label>
+                    <input matInput formControlName="price" required readonly class="text-gray-700">
+                    <mat-error *ngIf="manageOrderForm.controls.price.touched && manageOrderForm.controls.price.invalid">
+                        <span *ngIf="manageOrderForm.controls.price.errors?.required" class="text-red-500 text-sm">Ce champ est obligatoire.</span>
+                        <span *ngIf="manageOrderForm.controls.price.errors?.pattern" class="text-red-500 text-sm">Ce champ est invalide.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Quantité Field -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label class="text-gray-600">Quantité</mat-label>
+                    <input matInput formControlName="quantity" required (keyup)="setQuantity($event)" #input class="text-gray-700">
+                    <mat-error *ngIf="manageOrderForm.controls.quantity.touched && manageOrderForm.controls.quantity.invalid">
+                        <span *ngIf="manageOrderForm.controls.quantity.errors?.required" class="text-red-500 text-sm">Ce champ est obligatoire.</span>
+                        <span *ngIf="manageOrderForm.controls.quantity.errors?.pattern" class="text-red-500 text-sm">Ce champ est invalide.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Total Field -->
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label class="text-gray-600">Total</mat-label>
+                    <input matInput formControlName="total" required readonly class="text-gray-700">
+                    <mat-error *ngIf="manageOrderForm.controls.total.touched && manageOrderForm.controls.total.invalid">
+                        <span *ngIf="manageOrderForm.controls.total.errors?.required" class="text-red-500 text-sm">Ce champ est obligatoire.</span>
+                        <span *ngIf="manageOrderForm.controls.total.errors?.pattern" class="text-red-500 text-sm">Ce champ est invalide.</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+
+    <div class="flex justify-between items-center mt-6">
+        <button mat-flat-button color="primary"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-300"
+                [disabled]="validateProductAdd()"
+                    [ngClass]="{
+                    'bg-gray-500 cursor-not-allowed': validateProductAdd(),
+                    'bg-blue-500 hover:bg-blue-600 transform hover:-translate-y-1': !validateProductAdd()
+                }"
+                (click)="add()">
+            Ajouter
+        </button>
+        <button (click)="submitAction()" mat-flat-button color="primary"
+                class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-300 flex items-center">
+            <mat-icon class="mr-2">monetization_on</mat-icon>
+            <span>Montant total {{totalAmount }}</span>
+        </button>
+    </div>
+</mat-card>
+
+<hr class="my-6 border-gray-200">
+
+<div class="responsive-table overflow-x-auto bg-white rounded-lg shadow-md border border-gray-200">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+        <!-- Nom Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="bg-gray-100 text-gray-700 font-semibold px-4 py-3">Nom</th>
+            <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-700 border-t border-gray-200">{{element.name}}</td>
+        </ng-container>
+
+        <!-- Catégorie Column -->
+        <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef class="bg-gray-100 text-gray-700 font-semibold px-4 py-3">Categorie</th>
+            <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-700 border-t border-gray-200">{{element.category}}</td>
+        </ng-container>
+
+        <!-- Prix Column -->
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef class="bg-gray-100 text-gray-700 font-semibold px-4 py-3">Prix</th>
+            <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-700 border-t border-gray-200">{{element.price }}</td>
+        </ng-container>
+
+        <!-- Quantité Column -->
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef class="bg-gray-100 text-gray-700 font-semibold px-4 py-3">Quantité</th>
+            <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-700 border-t border-gray-200">{{element.quantity}}</td>
+        </ng-container>
+
+        <!-- Total Column -->
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef class="bg-gray-100 text-gray-700 font-semibold px-4 py-3">Total</th>
+            <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-700 border-t border-gray-200">{{element.total  }}</td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef class="bg-gray-100 text-gray-700 font-semibold px-4 py-3">Supprimer</th>
+            <td mat-cell *matCellDef="let element; let i = index" class="px-4 py-3 text-gray-700 border-t border-gray-200">
+                <button mat-icon-button color="warn"
+                        class="bg-red-100 text-red-600 hover:bg-red-200 transition-colors duration-200"
+                        matToolTip="Supprimer"
+                        (click)="handleDeleteAction(i,element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true" class="sticky top-0 z-10"></tr>
+        <tr mat-row *matRowDef="let row; columns:displayedColumns;" class="hover:bg-gray-50 transition-colors duration-150"></tr>
+    </table>
+</div>

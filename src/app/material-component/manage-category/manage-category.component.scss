@@ -1,0 +1,113 @@
+
+.product-management-card .header {
+  display: flex;
+  justify-content: space-between; /* Place le titre à gauche et le bouton à droite */
+  align-items: center; /* Centre verticalement le contenu */
+  padding: 8px; /* Espace interne pour respirer */
+}
+
+table.mat-table {
+  width: 100%;
+  table-layout: auto; /* Rend la table flexible */
+}
+
+th.mat-header-cell, td.mat-cell {
+  min-width: 150px; /* Largeur minimale des colonnes */
+  word-wrap: break-word; /* Empêche le débordement */
+  white-space: nowrap; /* Pas de retour à la ligne automatique */
+}
+
+th.mat-header-cell:nth-child(1), td.mat-cell:nth-child(1) {
+  width: 70%; /* Largeur pour la colonne Nom */
+}
+
+th.mat-header-cell:nth-child(2), td.mat-cell:nth-child(2) {
+  width: 30%; /* Largeur pour la colonne Action */
+}
+
+.float-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  .custom-special-btn {
+    background-color: #679436; /* Couleur de fond verte */
+    color: white; /* Couleur du texte */
+    padding: 10px 20px; /* Espace intérieur */
+    border: none; /* Retire les bordures */
+    border-radius: 50px; /* Coins très arrondis pour un style moderne */
+    font-size: 16px; /* Taille de la police */
+    font-weight: 600; /* Texte légèrement gras */
+    letter-spacing: 1px; /* Espacement des lettres */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Ombre douce pour effet 3D */
+    cursor: pointer; /* Curseur au survol */
+    transition: all 0.3s ease; /* Transition douce pour les effets */
+    position: relative;
+    overflow: hidden; /* Pour cacher l'effet spécial au survol */
+  }
+  
+
+  .custom-special-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.3); /* Couleur spéciale (effet) */
+    transition: all 0.75s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0); /* Commence à une petite taille */
+  }
+  
+  .custom-special-btn:hover::before {
+    transform: translate(-50%, -50%) scale(1); /* Élargit l'effet au survol */
+  }
+  
+  .custom-special-btn:hover {
+    background-color: #56732b; /* Couleur légèrement plus foncée au survol */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25); /* Accentuation de l'ombre */
+  }
+
+
+
+
+.mat-card{
+    padding: 20px;
+}
+
+.table{
+    width: 100%;
+}
+
+::ng-deep .highlight{
+    color: white;
+    background-color: #679436;
+}
+
+
+.custom-primary-btn {
+    background-color: #679436; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    padding: 8px 16px; /* Ajuster l'espace intérieur pour un meilleur rendu */
+    border: none; /* Retirer les bordures */
+    border-radius: 4px; /* Arrondir légèrement les coins */
+    font-size: 14px; /* Taille de police plus petite pour un bouton plus équilibré */
+    font-weight: 600; /* Texte un peu moins gras */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ombre pour effet 3D subtil */
+    cursor: pointer; /* Curseur pour montrer que c'est cliquable */
+    transition: all 0.3s ease; /* Transition plus fluide */
+  }
+  
+  .custom-primary-btn:hover {
+    background-color: #56732b; /* Couleur de fond légèrement plus sombre au survol */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25); /* Accentuation de l'ombre */
+    transform: translateY(-2px); /* Légère élévation du bouton au survol */
+  }
+  
+  .custom-primary-btn:active {
+    background-color: #4b7027; /* Couleur plus sombre lorsqu'on clique */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Réduction de l'ombre au clic */
+    transform: translateY(0); /* Bouton enfoncé */
+  }

@@ -1,0 +1,43 @@
+<div class="main-container flex flex-col h-screen bg-gray-50">
+  <!-- Top Navigation Bar -->
+  <mat-toolbar color="primary" class="topbar relative bg-blue-600 text-white shadow-md z-10">
+    <div class="navbar-header flex items-center">
+      <button mat-icon-button 
+              (click)="snav.toggle()" 
+              value="sidebarclosed" 
+              class="text-white hover:bg-blue-700 transition-colors duration-200 mr-2">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="flex items-center">
+        <mat-icon class="mr-2">storefront</mat-icon>
+        <span class="hidden sm:inline-block text-xl font-semibold">
+          Oasis De Délice
+        </span>
+      </div>
+    </div>
+    
+    <span class="flex-grow"></span>
+    
+    <app-header class="flex items-center"></app-header>
+  </mat-toolbar>
+
+  <!-- Main Content Area -->
+  <mat-sidenav-container class="example-sidenav-container flex-grow  " [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
+    <!-- Sidebar -->
+    <mat-sidenav #snav id="snav" 
+                class="dark-sidebar bg-gray-800 text-white w-64 shadow-lg clas"
+                [mode]="mobileQuery.matches ? 'side' : 'over'"
+                fixedTopGap="0" 
+                [opened]="mobileQuery.matches" 
+                [disableClose]="mobileQuery.matches">
+      <app-sidebar></app-sidebar>
+    </mat-sidenav>
+
+    <!-- Page Content -->
+    <mat-sidenav-content class="page-wrapper bg-gray-200">
+      <div class="page-content p-4 md:p-6">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

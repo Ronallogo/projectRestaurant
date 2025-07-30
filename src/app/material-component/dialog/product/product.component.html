@@ -1,0 +1,90 @@
+<mat-toolbar color="primary" class="bg-blue-600 text-white shadow-md">
+  <mat-toolbar-row class="flex flex-row items-center px-4 py-2">
+    <span class="text-xl font-medium">Ajouter un produit</span>
+    <span class="flex-grow"></span> <!-- Spacer -->
+    <button class="mat-dialog-close hover:bg-blue-700 rounded-full p-1 transition-colors duration-200" 
+            mat-icon-button 
+            mat-dialog-close>
+      <mat-icon class="text-white">close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="mat-typography p-6 bg-gray-50">
+  <form [formGroup]="ProductForm">
+    <div class="flex flex-col gap-6">
+      <!-- Name Field -->
+      <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label class="text-gray-700">Nom</mat-label>
+          <input matInput formControlName="name" required 
+                 class="mt-1"
+                 [class.error]="ProductForm.controls.name.invalid && ProductForm.controls.name.touched">
+          <mat-error *ngIf="ProductForm.controls.name.touched && ProductForm.controls.name.invalid">
+            <span *ngIf="ProductForm.controls.name.errors?.required" class="text-red-600">Ce champ est obligatoire.</span>
+            <span *ngIf="ProductForm.controls.name.errors?.pattern" class="text-red-600">Ce champ est invalide.</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Price and Category Row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Price Field -->
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label class="text-gray-700">Prix</mat-label>
+          <input matInput formControlName="price" required
+                 [class.error]="ProductForm.controls.price.invalid && ProductForm.controls.price.touched">
+          <mat-error *ngIf="ProductForm.controls.price.touched && ProductForm.controls.price.invalid">
+            <span *ngIf="ProductForm.controls.price.errors?.required" class="text-red-600">Ce champ est obligatoire.</span>
+            <span *ngIf="ProductForm.controls.price.errors?.pattern" class="text-red-600">Ce champ est invalide.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Category Field -->
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label class="text-gray-700">Catégorie</mat-label>
+          <mat-select formControlName="categoryId" required>
+            @for (category of categories; track category) {
+              <mat-option [value]="category.id" class="hover:bg-gray-100">
+                {{ category.name }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Description Field -->
+      <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label class="text-gray-700">Description</mat-label>
+          <textarea matInput formControlName="description" required rows="4"
+                    [class.error]="ProductForm.controls.description.invalid && ProductForm.controls.description.touched"></textarea>
+          <mat-error *ngIf="ProductForm.controls.description.touched && ProductForm.controls.description.invalid">
+            <span *ngIf="ProductForm.controls.description.errors?.required" class="text-red-600">Ce champ est obligatoire.</span>
+            <span *ngIf="ProductForm.controls.description.errors?.pattern" class="text-red-600">Ce champ est invalide</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <!-- Action Buttons -->
+  <div class="flex justify-end gap-4 mt-6">
+    <button mat-raised-button 
+            color="primary" 
+            class="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 px-4 py-2 rounded-lg transition-colors duration-200"
+            type="submit" 
+            (click)="add()" 
+            [disabled]="!(ProductForm.valid && ProductForm.dirty)">
+      <mat-icon>save</mat-icon> 
+      <span>{{action}}</span>
+    </button>
+    
+    <button mat-raised-button 
+            class="bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2 px-4 py-2 rounded-lg transition-colors duration-200"
+            mat-dialog-close>
+      <mat-icon>cancel</mat-icon> 
+      <span>Fermer</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<mat-card class="bg-white shadow-lg rounded-xl p-6 mb-8 border border-gray-100">
+    <div class="flex justify-start ">
+        <span class="material-icons-outlined text-3xl text-indigo-600 mr-3">dashboard</span>
+        <h1 class="text-4xl font-thin   text-gray-800 ">Tableau de Bord</h1>
+        
+    </div>
+</mat-card>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <!-- Carte Produit -->
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Produits</p>
+                    <h3 class="text-4xl font-bold text-blue-600 mt-2">{{data?.product || 'N/A'}}</h3>
+                </div>
+                <div class="bg-blue-100 p-3 rounded-full">
+                    <span class="material-icons-outlined text-blue-600 text-3xl">inventory_2</span>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-6">Total des produits enregistrés dans le système</p>
+            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                    [routerLink]="['/cafe/product']">
+                <span class="mr-2">Voir Produits</span>
+                <span class="material-icons-outlined text-sm">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Carte Facture -->
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Factures</p>
+                    <h3 class="text-4xl font-bold text-green-600 mt-2">{{data?.bill || 'N/A'}}</h3>
+                </div>
+                <div class="bg-green-100 p-3 rounded-full">
+                    <span class="material-icons-outlined text-green-600 text-3xl">receipt</span>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-6">Total des factures générées dans le système</p>
+            <button class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                    [routerLink]="['/cafe/bill']">
+                <span class="mr-2">Voir Factures</span>
+                <span class="material-icons-outlined text-sm">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Carte Catégorie -->
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Catégories</p>
+                    <h3 class="text-4xl font-bold text-purple-600 mt-2">{{data?.category || 'N/A'}}</h3>
+                </div>
+                <div class="bg-purple-100 p-3 rounded-full">
+                    <span class="material-icons-outlined text-purple-600 text-3xl">category</span>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-6">Total des catégories disponibles dans le système</p>
+            <button class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                    [routerLink]="['/cafe/category']">
+                <span class="mr-2">Voir Catégories</span>
+                <span class="material-icons-outlined text-sm">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+
+</div>

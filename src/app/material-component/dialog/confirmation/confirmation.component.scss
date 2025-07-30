@@ -1,0 +1,84 @@
+/* Barre d'outils avec un vert personnalisé */
+.custom-toolbar {
+  background-color: #4caf50 !important;
+  color: white !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 8px 16px; /* Réduit légèrement la hauteur pour un affichage plus compact */
+}
+
+/* Espacement entre les éléments */
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Barre d'outils (ligne) avec un alignement amélioré */
+.mat-toolbar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Style des boutons Oui et Non */
+button.mat-raised-button {
+  transition: all 0.3s ease;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 8px 16px;
+  margin: 0 4px; /* Espace autour des boutons */
+  outline: none;
+}
+
+/* Effet sur le bouton Oui */
+button[color="primary"] {
+  background-color: #4CAF50;
+  color: white;
+  box-shadow: 0 4px 6px rgba(76, 175, 80, 0.3);
+}
+
+button[color="primary"]:hover {
+  background-color: #388e3c;
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.5);
+}
+
+button[color="primary"]:focus {
+  outline: 2px solid #81c784;
+}
+
+/* Effet sur le bouton Non */
+button[color="warn"] {
+  background-color: #f44336;
+  color: white;
+  box-shadow: 0 4px 6px rgba(244, 67, 54, 0.3);
+}
+
+button[color="warn"]:hover {
+  background-color: #d32f2f;
+  box-shadow: 0 6px 12px rgba(244, 67, 54, 0.5);
+}
+
+button[color="warn"]:focus {
+  outline: 2px solid #ef9a9a;
+}
+
+/* Ajout d'un effet de transition à la boîte de dialogue */
+.mat-dialog-content {
+  animation: fadeIn 0.3s ease;
+  padding-bottom: 16px; /* Espace en bas pour améliorer la lisibilité */
+}
+
+/* Animation d'apparition douce */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive design pour les petits écrans */
+@media (max-width: 600px) {
+  .custom-toolbar {
+    padding: 6px 12px;
+  }
+  button.mat-raised-button {
+    padding: 6px 12px;
+    font-size: 0.9em;
+  }
+}

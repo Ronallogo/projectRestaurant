@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row">
+    <span>Se Connecter</span>
+    <span class="spacer"></span>
+    <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon> <!-- Utilisez l'icône appropriée -->
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="loginFrom">
+    <div fxLayout="column" fxFlex>
+      <mat-form-field appearance="standard" fxFlex>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required>
+        <mat-error *ngIf="loginFrom.controls.email.touched && loginFrom.controls.email.invalid">
+          <span *ngIf="loginFrom.controls.email.errors?.required">Ce champ est obligatoire.</span>
+          <span *ngIf="loginFrom.controls.email.errors?.pattern">Ce champ est invalide.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" fxFlex>
+        <mat-label>Mot de passe</mat-label>
+        <input matInput formControlName="password" type="password" required [type]="hide ? 'password' : 'text'">
+        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginFrom.controls.password.touched && loginFrom.controls.password.invalid">
+          <span *ngIf="loginFrom.controls.password.errors?.required">Ce champ est obligatoire.</span>
+          <span *ngIf="loginFrom.controls.password.errors?.pattern">Ce champ est invalide.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="handleSubmit()" [disabled]="!(loginFrom.valid && loginFrom.dirty)">
+    <mat-icon>Se Connecter</mat-icon> Se Connecter
+  </button>
+  <button mat-raised-button color="red" mat-dialog-close>
+    <mat-icon>cancel</mat-icon> Fermer
+  </button>
+</mat-dialog-actions>

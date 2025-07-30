@@ -1,0 +1,32 @@
+<mat-toolbar class="custom-toolbar bg-green-500 text-white shadow-md"> <!-- Green accent color with shadow -->
+  <mat-toolbar-row class="flex flex-row justify-between items-center px-4"> <!-- Flex layout with padding -->
+    <span class="text-lg font-semibold">Confirmation</span>
+    <button class="mat-dialog-close hover:bg-green-600 rounded-full p-1 transition-colors duration-200" 
+            mat-icon-button 
+            mat-dialog-close>
+      <mat-icon class="text-white">close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography p-6 bg-gray-50">
+  <h2 class="text-gray-800 text-xl font-medium mb-4">Êtes-vous sûr de {{ details.message }} ?</h2>
+</mat-dialog-content>
+
+<mat-dialog-actions class="flex justify-end space-x-4 p-4 bg-gray-100">
+  <button mat-raised-button 
+          color="primary" 
+          class="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2"
+          (click)="handleChangeAction()">
+    <mat-icon>check_circle</mat-icon> 
+    <span>Oui</span>
+  </button>
+
+  <button mat-raised-button 
+          color="warn" 
+          class="bg-red-600 hover:bg-red-700 text-white flex items-center gap-2"
+          mat-dialog-close>
+    <mat-icon>cancel</mat-icon> 
+    <span>Non</span>
+  </button>
+</mat-dialog-actions>

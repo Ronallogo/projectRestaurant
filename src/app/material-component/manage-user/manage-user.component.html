@@ -1,0 +1,69 @@
+<mat-card>
+    <b><span>Gestion Utilisateurs</span></b>
+</mat-card>
+
+<hr>
+
+<mat-card>
+    <mat-form-field appearance="standard">
+        <mat-label>Filtre</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+</mat-card>
+
+<hr>
+
+
+<div class="responsive_table">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nom</th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email</th>
+            <td mat-cell *matCellDef="let element">{{element.email}}</td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="contactNumber">
+            <th mat-header-cell *matHeaderCellDef> Téléphone</th>
+            <td mat-cell *matCellDef="let element">{{element.contactNumber}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td  mat-cell *matCellDef="let element" class="action-link ">
+                @if(emailUser !== element.email){
+                      @if(element.status =="true"){
+                      <button  mat-icon-button class="custom-primary-btn  mx-6 mt-2 ease-in-out transition-all  hover:bg-blue-200  duration-200" 
+                        matTooltip="Modifier" (click)=" changeState(element.id)">
+                     <svg fill="#0ec601" width="25px" height="25px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" stroke="#0ec601"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M429.811 577.1l-80.485-86.309c-21.425-22.976-57.42-24.233-80.396-2.807s-24.233 57.42-2.807 80.396l81.839 87.762-.158.152 43.493 45.038c19.643 20.341 52.056 20.907 72.397 1.264l35.686-34.462 8.195-7.642-.133-.143 251.802-243.163c22.607-21.832 23.236-57.857 1.405-80.464s-57.857-23.236-80.464-1.405L429.812 577.1zM512 1024C229.23 1024 0 794.77 0 512S229.23 0 512 0s512 229.23 512 512-229.23 512-512 512z"></path></g>
+                    </svg>
+                    </button>
+                }@else {
+                     <button mat-icon-button class="custom-primary-btn  mx-6 mt-2   hover:bg-blue-200transition-all duration-200" 
+                        matTooltip="Modifier" (click)=" changeState(element.id)">
+                    <svg width="25px" height="25px" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" fill="#dbd400" stroke="#dbd400"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6A6 6 0 110 6a6 6 0 0112 0zM5 3a1 1 0 012 0v3a1 1 0 01-2 0V3zm1 5a1 1 0 100 2 1 1 0 000-2z" fill="#d8db00"></path> </g>
+                    </svg>
+                </button>
+                }
+                
+                 
+
+                <button mat-icon-button class="custom-red-btn   text-red-600 hover:bg-red-200 transition-colors duration-200" 
+                        matTooltip="Supprimer" (click)=" delete(element.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                }
+                <mat-slide-toggle  (change)="onChange($event.checked,element.id)"
+                matTooltip="Activate or Deactivate User" [checked]='element.status'>
+            </mat-slide-toggle>   
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
